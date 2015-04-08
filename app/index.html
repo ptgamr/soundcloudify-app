@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>soundcloudify</title>
+        <base target="_blank" />
+
+         <!-- build:css styles/vendor.css -->
+        <!-- bower:css -->
+        <link href="bower_components/angular/angular-csp.css" rel="stylesheet">
+        <link href="bower_components/font-awesome/css/font-awesome.css" rel="stylesheet">
+        <link href="bower_components/angular-material/dist/angular-material.css" rel="stylesheet">
+        <link href="bower_components/ionicons/css/ionicons.css" rel="stylesheet">
+        <!-- endbower -->
+        <!-- endbuild -->
+        <!-- build:css styles/main.css -->
+        <link href="styles/iconmoon.css" rel="stylesheet">
+        <link href="styles/loading.css" rel="stylesheet">
+        <link href="styles/main.css" rel="stylesheet">
+        <!-- endbuild -->
+    </head>
+    <body id="soundcloudify">
+        <div layout="row">
+            <div id="player">
+                <scd-player></scd-player>
+            </div>
+
+            <div id="discovery" ng-controller="DiscoveryController as vm">
+                <md-tabs class="main-nav md-primary" md-selected="vm.selectedIndex">
+                    <md-tab md-on-select="vm.onTabSelect()">
+                        <md-icon md-font-icon="icon ion-ios-musical-notes"></md-icon>
+                        <span>now playing</span>
+                    </md-tab>
+                    <md-tab md-on-select="vm.onTabSelect()">
+                        <md-icon md-font-icon="icon ion-search"></md-icon>
+                        <span>search</span>
+                    </md-tab>
+                    <md-tab md-on-select="vm.onTabSelect()">
+                        <md-icon md-font-icon="icon ion-film-marker"></md-icon>
+                        <span>playlist</span>
+                    </md-tab>
+                    <md-tab md-on-select="vm.onTabSelect()">
+                        <md-icon md-font-icon="icon ion-stats-bars"></md-icon>
+                        <span>charts</span>
+                    </md-tab>
+                </md-tabs>
+                <div class="tabpanel-container">
+                    <div role="tabpanel">
+                        <div id="tab-content" ui-view></div>
+                    </div>
+                </div>
+                <playlist-menu id="singleton-playlist-menu"></playlist-menu>
+            </div>
+        </div>
+
+        <!-- build:js scripts/vendor.js -->
+        <!-- bower:js -->
+        <script src="bower_components/underscore/underscore-min.js"></script>
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="bower_components/angular/angular.min.js"></script>
+        <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+        <script src="bower_components/angular-aria/angular-aria.min.js"></script>
+        <script src="bower_components/angular-material/dist/angular-material.js"></script>
+        <script src="bower_components/angular-route/angular-route.min.js"></script>
+        <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+        <script src="bower_components/react/react.js"></script>
+        <script src="bower_components/ngReact/ngReact.min.js"></script>
+        <script src="scripts/foreground/md5.js"></script>
+        <!-- endbower -->
+        <!-- endbuild -->
+        <!-- build:js scripts/popup.js -->
+        <script src="scripts/foreground/trackList.js"></script> <!-- React component -->
+        <script src="scripts/foreground/app.js"></script>
+        <script src="scripts/foreground/corePlayer.js"></script>
+
+        <script src="scripts/foreground/controllers/MainController.js"></script>
+        <script src="scripts/foreground/controllers/DiscoveryController.js"></script>
+        <script src="scripts/foreground/controllers/PlaylistController.js"></script>
+        <script src="scripts/foreground/controllers/PlaylistViewController.js"></script>
+        <script src="scripts/foreground/controllers/ChartsController.js"></script>
+        <script src="scripts/foreground/controllers/ChartsViewController.js"></script>
+        <script src="scripts/foreground/controllers/NowPlayingController.js"></script>
+        <script src="scripts/foreground/controllers/SearchController.js"></script>
+
+        <script src="scripts/foreground/directives/scdPlayerDirective.js"></script>
+        <script src="scripts/foreground/directives/loadingDirective.js"></script>
+        <script src="scripts/foreground/directives/trackTitleDirective.js"></script>
+        <script src="scripts/foreground/directives/toggleButtonDirective.js"></script>
+        <script src="scripts/foreground/directives/playlistMenuDirective.js"></script>
+        <script src="scripts/foreground/directives/trackListDirective.js"></script>
+        <script src="scripts/foreground/directives/playingTrackAwareDirective.js"></script>
+        <script src="scripts/foreground/directives/configurationDirective.js"></script>
+
+        <script src="scripts/foreground/providers/Paginator.js"></script>
+
+        <script src="scripts/foreground/filters/scArtworkFilter.js"></script>
+        <script src="scripts/foreground/filters/prettyTimeFilter.js"></script>
+
+        <script src="scripts/foreground/services/Messaging.js"></script>
+        <script src="scripts/foreground/services/CategoryService.js"></script>
+        <script src="scripts/foreground/services/SearchService.js"></script>
+        <script src="scripts/foreground/services/SuggestionService.js"></script>
+        <script src="scripts/foreground/services/NowPlayingService.js"></script>
+        <script src="scripts/foreground/services/PlaylistService.js"></script>
+        <script src="scripts/foreground/services/TrackAdapter.js"></script>
+        <script src="scripts/foreground/services/GATracker.js"></script>
+        <script src="scripts/foreground/services/LastFMAuthentication.js"></script>
+        <!-- endbuild -->
+    </body>
+</html>
