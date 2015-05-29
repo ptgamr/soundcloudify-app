@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html ng-csp>
     <head>
         <meta charset="utf-8">
         <title>soundcloudify</title>
@@ -65,46 +65,57 @@
         <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
         <script src="bower_components/react/react.js"></script>
         <script src="bower_components/ngReact/ngReact.min.js"></script>
-        <script src="scripts/foreground/md5.js"></script>
+        <script src="bower_components/angular-indexed-db/angular-indexed-db.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
         <!-- build:js scripts/popup.js -->
         <script src="scripts/foreground/trackList.js"></script> <!-- React component -->
+        <script src="scripts/foreground/core/app.js"></script>
+
+        <script src="scripts/foreground/core/controllers/MainController.js"></script>
+        <script src="scripts/foreground/core/controllers/DiscoveryController.js"></script>
+        <script src="scripts/foreground/core/controllers/PlaylistController.js"></script>
+        <script src="scripts/foreground/core/controllers/PlaylistViewController.js"></script>
+        <script src="scripts/foreground/core/controllers/ChartsController.js"></script>
+        <script src="scripts/foreground/core/controllers/ChartsViewController.js"></script>
+        <script src="scripts/foreground/core/controllers/NowPlayingController.js"></script>
+        <script src="scripts/foreground/core/controllers/SearchController.js"></script>
+
+        <script src="scripts/foreground/core/directives/scdPlayerDirective.js"></script>
+        <script src="scripts/foreground/core/directives/loadingDirective.js"></script>
+        <script src="scripts/foreground/core/directives/trackTitleDirective.js"></script>
+        <script src="scripts/foreground/core/directives/toggleButtonDirective.js"></script>
+        <script src="scripts/foreground/core/directives/playlistMenuDirective.js"></script>
+        <script src="scripts/foreground/core/directives/trackListDirective.js"></script>
+        <script src="scripts/foreground/core/directives/playingTrackAwareDirective.js"></script>
+        <script src="scripts/foreground/core/directives/configurationDirective.js"></script>
+        <script src="scripts/foreground/core/directives/rightClickDirective.js"></script>
+
+        <script src="scripts/foreground/core/providers/Paginator.js"></script>
+        <script src="scripts/foreground/core/providers/SCConfigurationProvider.js"></script>
+
+        <script src="scripts/foreground/core/filters/scArtworkFilter.js"></script>
+        <script src="scripts/foreground/core/filters/prettyTimeFilter.js"></script>
+
+        <script src="scripts/foreground/core/services/StorageService.js"></script>
+        <script src="scripts/foreground/core/services/Messaging.js"></script>
+        <script src="scripts/foreground/core/services/CategoryService.js"></script>
+        <script src="scripts/foreground/core/services/SearchService.js"></script>
+        <script src="scripts/foreground/core/services/SearchSingleton.js"></script>
+        <script src="scripts/foreground/core/services/SuggestionService.js"></script>
+        <script src="scripts/foreground/core/services/NowPlayingService.js"></script>
+        <script src="scripts/foreground/core/services/PlaylistService.js"></script>
+        <script src="scripts/foreground/core/services/StarService.js"></script>
+        <script src="scripts/foreground/core/services/TrackAdapter.js"></script>
+        <script src="scripts/foreground/core/services/GATracker.js"></script>
+        <script src="scripts/foreground/core/services/LastFMAuthentication.js"></script>
+        <script src="scripts/foreground/core/services/UserService.js"></script>
+        <script src="scripts/foreground/core/services/YahooProxy.js"></script>
+        <script src="scripts/foreground/core/services/HttpRequestInterceptor.js"></script>
+        <script src="scripts/foreground/core/services/SyncService.js"></script>
+        <!-- endbuild -->
+
         <script src="scripts/foreground/app.js"></script>
         <script src="scripts/foreground/corePlayer.js"></script>
-
-        <script src="scripts/foreground/controllers/MainController.js"></script>
-        <script src="scripts/foreground/controllers/DiscoveryController.js"></script>
-        <script src="scripts/foreground/controllers/PlaylistController.js"></script>
-        <script src="scripts/foreground/controllers/PlaylistViewController.js"></script>
-        <script src="scripts/foreground/controllers/ChartsController.js"></script>
-        <script src="scripts/foreground/controllers/ChartsViewController.js"></script>
-        <script src="scripts/foreground/controllers/NowPlayingController.js"></script>
-        <script src="scripts/foreground/controllers/SearchController.js"></script>
-
-        <script src="scripts/foreground/directives/scdPlayerDirective.js"></script>
-        <script src="scripts/foreground/directives/loadingDirective.js"></script>
-        <script src="scripts/foreground/directives/trackTitleDirective.js"></script>
-        <script src="scripts/foreground/directives/toggleButtonDirective.js"></script>
-        <script src="scripts/foreground/directives/playlistMenuDirective.js"></script>
-        <script src="scripts/foreground/directives/trackListDirective.js"></script>
-        <script src="scripts/foreground/directives/playingTrackAwareDirective.js"></script>
-        <script src="scripts/foreground/directives/configurationDirective.js"></script>
-
-        <script src="scripts/foreground/providers/Paginator.js"></script>
-
-        <script src="scripts/foreground/filters/scArtworkFilter.js"></script>
-        <script src="scripts/foreground/filters/prettyTimeFilter.js"></script>
-
-        <script src="scripts/foreground/services/Messaging.js"></script>
-        <script src="scripts/foreground/services/CategoryService.js"></script>
-        <script src="scripts/foreground/services/SearchService.js"></script>
-        <script src="scripts/foreground/services/SuggestionService.js"></script>
-        <script src="scripts/foreground/services/NowPlayingService.js"></script>
-        <script src="scripts/foreground/services/PlaylistService.js"></script>
-        <script src="scripts/foreground/services/TrackAdapter.js"></script>
-        <script src="scripts/foreground/services/GATracker.js"></script>
-        <script src="scripts/foreground/services/LastFMAuthentication.js"></script>
-        <!-- endbuild -->
     </body>
 </html>

@@ -878,8 +878,7 @@ if (!YT.loading) {
     function mb() {
         var a = null;
         try {
-            //a = window.localStorage || null
-            a = null
+            a = window.localStorage || null
         } catch (b) {}
         this.c = a
     }
