@@ -1,0 +1,182 @@
+<!--
+  - Copyright (c) 2012 The Chromium Authors. All rights reserved.
+  - Use of this source code is governed by a BSD-style license that can be
+  - found in the LICENSE file.
+  -->
+<!doctype html>
+<html>
+  <head>
+    <style type="text/css">
+      body {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div id="log">AAA</div>
+    <div id="player"></div>
+
+    <script>
+
+      var player = null;
+      var playerReady = false;
+      var appWindow = null;
+      var appOrigin = null;
+
+      var tag = document.createElement('script');
+
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      /**
+       * ===================================================
+       *                YOUTUBE IFRAME API
+       * ===================================================
+       */
+      window.onYouTubeIframeAPIReady = function() {
+          player = new YT.Player('player', {
+                  height: '220',
+                  width: '220',
+                  videoId: 'J1Ol6M0d9sg',
+                  events: {
+                      'onReady': onPlayerReady,
+                      'onStateChange': onPlayerStateChange,
+                      'onError': onPlayerError
+                  }
+              });
+      };
+
+      window.onPlayerReady = function(event) {
+        playerReady = true;
+      }
+      
+
+      // Set up message event handler:
+      window.addEventListener('message', function(event) {
+        var command = event.data.command;
+
+        if (!appWindow) {
+          updateLog('SOURCE REGISTERED');
+          appWindow = event.source;
+          appOrigin = event.origin;
+        }
+
+
+        switch(command) {
+          case 'play':
+            updateLog('play from app');
+            play(event.data.videoId);
+            break;
+          case 'resume':
+            resume();
+            break;
+          case 'pause':
+            pause()
+            break;
+          case 'stop':
+            stop();
+            break;
+          case 'replay':
+            replay();
+            break;
+          case 'seek':
+            seek(event.data.xpos);
+            break;
+          case 'clear':
+            clear();
+            break;
+          case 'setVolume':
+            setVolume(event.data.volume);
+            break;
+        }
+      });
+
+      function play(videoId) {
+        player.loadVideoById({videoId: videoId});
+      }
+
+      function resume(videoId) {
+        player.playVideo();
+      }
+
+      function pause() {
+        player.pauseVideo();
+      }
+
+      function stop() {
+        player.stopVideo();
+      }
+
+      function replay() {
+        player.seekTo(0);
+      }
+
+      function seek() {
+        player.seekTo(xpos * player.getDuration());
+      }
+
+      function clear() {
+        stop();
+        player.clearVideo();
+      }
+
+      function setVolume(volume) {
+        if (player && player.setVolume) {
+          player.setVolume(volume * 100);
+          if (player.isMuted()) {
+            player.unMute();
+          }
+        }
+      }
+
+      var count = 0;
+
+      function onPlayerStateChange(event) {
+
+        if (!appWindow) return;
+
+        count ++;
+
+        switch(event.data) {
+            case YT.PlayerState.PLAYING:
+
+              updateLog(count);
+
+              appWindow.postMessage({
+                command: 'player.timeupdate',
+                currentTime: player.getCurrentTime(),
+                duration: player.getDuration()
+              }, appOrigin);
+              break;
+
+            case YT.PlayerState.ENDED:
+                appWindow.postMessage({
+                  command: 'player.ended'
+                }, appOrigin);
+                break;
+
+            case YT.PlayerState.PAUSED:
+                //youtubePlayer.play();
+                break;
+            case YT.PlayerState.BUFFERING:
+                break;
+            case YT.PlayerState.CUED:
+                break;
+        }
+      }
+
+      function onPlayerError() {
+        appWindow.postMessage({
+          command: 'player.error'
+        }, appOrigin);
+      }
+
+      function updateLog(msg) {
+        document.getElementById('log').innerHTML = msg;
+      }
+
+    </script>
+  </body>
+</html>

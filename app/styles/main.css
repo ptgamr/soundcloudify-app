@@ -8,6 +8,14 @@ html {
   max-height: 448px;
 }
 
+#youtubeFrame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 220px;
+  height: 220px;
+}
+
 .overlay {
   background-color: #12121A;
   height: 100%;

@@ -5,9 +5,8 @@
   	"manifest_version": 2,
   	"default_locale": "en",
   	"permissions": [
-      "webRequest",
-      "webRequestBlocking",
-  		"app.runtime",
+      "identity",
+      "identity.email",
   		"app.window",
   		"audio",
   		"storage",
@@ -17,7 +16,9 @@
   		"http://*/*",
   		"https://*/*",
   		"http://127.0.0.1/*",
-  		"chrome-extension://*/*"
+  		"chrome-extension://*/*",
+      "content_security_policy",
+      "webview"
   	],
   	"icons": {
   		"16": "images/icon-16.png",
@@ -26,7 +27,14 @@
   	"app": {
   		"background": {
         "page": "background.html"
-      },
-      "content_security_policy": "script-src 'self' 'unsafe-eval' i1.sndcdn.com https://www.google-analytics.com https://api.soundcloud.com https://api-v2.soundcloud.com; object-src 'self'"
-  	}
+      }
+  	},
+    "webview": {
+      "partitions": [
+        {
+          "name": "youtube",
+          "accessible_resources": ["sandbox.html"]
+        }
+      ]
+    }
   }

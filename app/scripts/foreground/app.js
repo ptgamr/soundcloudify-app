@@ -5,7 +5,7 @@
 	var app = angular.module('soundcloudify.chromeapp', ['soundcloudify.core']);
 
 	app.config(function($stateProvider, $urlRouterProvider, $mdThemingProvider,
-                                    $compileProvider, $httpProvider, $indexedDBProvider, $logProvider, SCConfigurationProvider) {
+                                    $compileProvider, $httpProvider, $indexedDBProvider, $logProvider, SCConfigurationProvider, $provide) {
 			$stateProvider
                 .state('nowPlaying', {
                     url: "/now-playing",
@@ -110,7 +110,16 @@
             //TODO: reenable it in production
             $compileProvider.debugInfoEnabled(false);
 
-            SCConfigurationProvider.configureClient('ext');
+            SCConfigurationProvider.configureClient('chromeapp');
+            SCConfigurationProvider.configureDirectiveViewPath('scripts/foreground/core/views');
+
+            // Prevent Angular from sniffing for the history API
+            // since it's not supported in packaged apps.
+            $provide.decorator('$window', function($delegate) {
+                $delegate.history = null;
+                return $delegate;
+            });
+
 		}
 	);
 

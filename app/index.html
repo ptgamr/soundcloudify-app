@@ -53,6 +53,8 @@
             </div>
         </div>
 
+        <webview id="youtubeFrame" class="" partition="youtube" src="sandbox.html"></webview>
+
         <!-- build:js scripts/vendor.js -->
         <!-- bower:js -->
         <script src="bower_components/underscore/underscore-min.js"></script>
@@ -105,6 +107,7 @@
         <script src="scripts/foreground/core/services/SuggestionService.js"></script>
         <script src="scripts/foreground/core/services/NowPlayingService.js"></script>
         <script src="scripts/foreground/core/services/PlaylistService.js"></script>
+        <script src="scripts/foreground/core/services/PlaylistImporter.js"></script>
         <script src="scripts/foreground/core/services/StarService.js"></script>
         <script src="scripts/foreground/core/services/TrackAdapter.js"></script>
         <script src="scripts/foreground/core/services/GATracker.js"></script>
@@ -116,6 +119,8 @@
         <!-- endbuild -->
 
         <script src="scripts/foreground/app.js"></script>
-        <script src="scripts/foreground/corePlayer.js"></script>
+        <script src="scripts/foreground/services/player/Player.js"></script>
+        <script src="scripts/foreground/services/player/SoundCloudPlayer.js"></script>
+        <script src="scripts/foreground/services/player/YoutubePlayer.js"></script>
     </body>
 </html>
